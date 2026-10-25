@@ -8,6 +8,7 @@ import itemRoutes from './routes/itemRoutes.js';
 import { errorHandler, notFound } from './middleware/errors.js';
 
 const app = express();
+app.set('trust proxy', 1);
 const port = Number(process.env.PORT) || 5000;
 if (!process.env.JWT_SECRET) throw new Error('JWT_SECRET must be configured in server/.env');
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173' }));
