@@ -23,6 +23,11 @@ export async function listItems(req, res, next) {
   } catch (err) { next(err); }
 }
 
+export async function listAllItems(req, res, next) {
+  try { res.json(await Item.find().populate('reportedBy', 'name email').sort({ createdAt: -1 }).limit(200)); }
+  catch (err) { next(err); }
+}
+
 export async function myItems(req, res, next) {
   try { res.json(await Item.find({ reportedBy: req.user._id }).sort({ createdAt: -1 })); }
   catch (err) { next(err); }

@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { createItem, deleteItem, listItems, myItems, setStatus, updateItem } from '../controllers/itemController.js';
+import { createItem, deleteItem, listAllItems, listItems, myItems, setStatus, updateItem } from '../controllers/itemController.js';
 import { requireAdmin, requireAuth } from '../middleware/auth.js';
 const router = Router();
 router.get('/', listItems);
 router.get('/mine', requireAuth, myItems);
+router.get('/admin/all', requireAuth, requireAdmin, listAllItems);
 router.post('/', requireAuth, createItem);
 router.patch('/:id/status', requireAuth, requireAdmin, setStatus);
 router.patch('/:id', requireAuth, updateItem);
